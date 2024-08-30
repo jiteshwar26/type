@@ -109,18 +109,20 @@ let typeHere = document.getElementById("typeHere");
 let typeThis_list = []
 let sentence = ""
 let startBtn = document.getElementById("startBtn");
+let errorMade = false;
 let spaceInserted = false;
 let currentWordIndex = 0;
 let currentCharIndex = 0;
 let typedWord;
 let typedChar;
 let wrongTyped = 0
-let timeLeft = 2;
+let timeLeft = 30;
 let time = document.getElementById("timer");
 
 function startTest(){
     startBtn.setAttribute('disabled', '')
     typeHere.focus()
+    time.innerText = timeLeft
     timer()
     loadSentence()
     // TimeRanges()
@@ -138,8 +140,16 @@ function timer(){
         else{
             // timeout.clearInterval()
             clearInterval(timeout)
-            typeThis.innerText = "Test ended!\nYour results\nAccuracy: 97%\nSpeed: 97WPM"
+            timeLeft = 30
+            typeThis.innerHTML = `
+            YOUR RESULTS<br>
+            <span class="resultText">Accuracy:</span> ${(((typeHere.innerText.length - wrongTyped)/typeHere.innerText.length)*100).toFixed(2)}%<br>
+            <span class="resultText">Speed:</span> ${(typeHere.innerText.length/5)*2}WPM`
             typeHere.innerText = "";
+
+            wrongTyped = 0
+            typeThis_list = []
+            sentence = ""
             typeHere.blur()
             startBtn.removeAttribute("disabled")
         }
@@ -193,6 +203,7 @@ typeHere.addEventListener("focus", function(){
 			    	typedWord = typeHere.innerHTML[typeHere.innerHTML.length - 1]
 					typedChar = typedWord[typedWord.length - 1]
         			currentCharIndex++;
+                    errorMade = false;
 	        	}else{
 	        		// function blink(){
 	        		// 	document.getElementById('wrong').classList.add("wrong")
@@ -207,7 +218,10 @@ typeHere.addEventListener("focus", function(){
                     setTimeout(() => {
                         document.getElementsByTagName("body")[0].classList.remove("danger")
                     }, 500);
-                    wrongTyped++
+                    if (errorMade != true){
+                        wrongTyped++
+                        errorMade = true
+                    }
 	        	}
         }
     })
