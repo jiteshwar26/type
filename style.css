@@ -54,7 +54,7 @@ section #timer
     place-items: center;
     font-size: 40px;
     font-weight: 800;
-    left: calc(50% - 60px);
+    left: calc(50% - 30px);
 }
 
 section .content{
@@ -94,4 +94,17 @@ button:hover{
 
 button:disabled{
     background-color: #353535;
+}
+
+
+@media (max-width: 500px){
+    body{
+        background-color: rgb(185, 6, 36);
+    }
+    #typeHere, #typeThis, nav, section #timer{
+        display: none;
+    }
+    #type{
+        display: flex !important;
+    }
 }
