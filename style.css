@@ -20,6 +20,10 @@ body
     }   
 }
 
+.resultText{
+    color: rgb(185, 6, 36);
+}
+
 nav
 {
     height: 80px;
@@ -66,7 +70,7 @@ section .content{
 }
 
 #typeHere{
-    background-color: rgb(228, 42, 42);
+    /* background-color:  rgb(185, 6, 36); */
     color: #fff;
     outline: none;
 }
